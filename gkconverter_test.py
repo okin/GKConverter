@@ -23,5 +23,10 @@ class GKConverterTest(unittest.TestCase):
 		self.assertAlmostEqual(50.11526435691097, x)
 		self.assertAlmostEqual(8.687625204011725, y)
 
+	def testWrongInput(self):
+		for (right, height) in ((100000, 1000000), (1000000, 100000), (1000000, 1000000)):
+			self.assertRaises(ValueError, GKConverter.convert_GK_to_lat_long, right, height)
+			self.assertRaises(ValueError, GKConverter.convert_GK_to_lat_long, right, height)
+
 if __name__ == '__main__':
 	unittest.main()
