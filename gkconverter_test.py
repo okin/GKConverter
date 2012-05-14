@@ -9,10 +9,7 @@ class GKConverterTest(unittest.TestCase):
 		self.assertAlmostEqual(8.687625204011725, y)
 
 	def testSimpleGKtoLatLongConversion(self):
-		right = 3477733
-		height = 5553274
-
-		(x, y) = GKConverter.convertGaussKruegerToLatitudeLongitude(right, height)
+		(x, y) = GKConverter.convertGaussKruegerToLatitudeLongitude(3477733, 5553274)
 
 		self.assertAlmostEqual(50.1164273930041, x)
 		self.assertAlmostEqual(8.6886330000005, y)
