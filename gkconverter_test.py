@@ -1,5 +1,5 @@
 import unittest
-from gkconverter import GKConverter
+import gkconverter as GKConverter
 
 class GKConverterTest(unittest.TestCase):
 	def testSimpleConversion(self):
