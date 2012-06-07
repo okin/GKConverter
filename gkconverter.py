@@ -24,27 +24,17 @@ def convertGaussKruegerToLatitudeLongitude(right, height):
     c = 6398786.849
     rho = 180 / pi
     bII = (GKHeight / 10000855.7646) * (GKHeight / 10000855.7646)
-    print 'bII: %s' % (bII, )
-
     bf = 325632.08677 * (GKHeight / 10000855.7646) * ((((((0.00000562025 * bII + 0.00022976983) * bII - 0.00113566119) * bII + 0.00424914906) * bII - 0.00831729565) * bII + 1))
-    print 'bf: %s' % (bf, )
 
     bf /= 3600 * rho
-    print 'bf: %s' % (bf, )
     co = cos(bf)
-    print 'co: %s' % (co, )
     g2 = e2 * (co * co)
-    print 'g2: %s' % (g2, )
     g1 = c / sqrt(1 + g2)
-    print 'g1: %s' % (g1, )
     t = tan(bf)
-    print 't: %s' % (t, )
     fa = (GKRight - round(GKRight / 1000000) * 1000000 - 500000) / g1
-    print 'fa: %s' % (fa, )
 
     GeoDezRight = ((bf - fa * fa * t * (1 + g2) / 2 + fa * fa * fa * fa * t * (5 + 3 * t * t + 6 * g2 - 6 * g2 * t * t) / 24) * rho)
     dl = fa - fa * fa * fa * (1 + 2 * t * t + g2) / 6 + fa * fa * fa * fa * fa * (1 + 28 * t * t + 24 * t * t * t * t) / 120
-    print 'dl: %s' % (dl, )
     GeoDezHeight = dl * rho / co + round(GKRight / 1000000) * 3
 
     return (GeoDezRight, GeoDezHeight)
