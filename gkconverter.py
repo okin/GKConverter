@@ -1,25 +1,25 @@
 #! python
 #-*- coding: utf-8 -*-
+"""
+Converting a Gauss-Kruger-Code to a latitude / longitude coordinate.
+"""
 from math import cos, pi, sqrt, tan, sin, atan
 
 
 def convert_GK_to_lat_long(right, height, use_wgs84=None):
-    (x, y) = convertGaussKruegerToLatitudeLongitude(right, height)
+    (x, y) = gauss_krueger_transformation(right, height)
 
-    return sevenParameterHelmertTransformation(x, y, use_wgs84)
+    return seven_parameter_helmert_transf(x, y, use_wgs84)
 
 
-def convertGaussKruegerToLatitudeLongitude(right, height):
-    x = right
-    y = height
-
+def gauss_krueger_transformation(right, height):
     #Check for invalid Parameters
-    if (not ((x > 1000000) and (y > 1000000))):
+    if (not ((right > 1000000) and (height > 1000000))):
         raise ValueError("No valid Gauss-Kruger-Code.")
 
     #Variables to prepare the geovalues
-    GKRight = x
-    GKHeight = y
+    GKRight = right
+    GKHeight = height
     e2 = 0.0067192188
     c = 6398786.849
     rho = 180 / pi
@@ -40,9 +40,9 @@ def convertGaussKruegerToLatitudeLongitude(right, height):
     return (GeoDezRight, GeoDezHeight)
 
 
-def sevenParameterHelmertTransformation(right, height, use_wgs84=False):
+def seven_parameter_helmert_transf(right, height, use_wgs84=False):
     #Variables used in the transformation
-    earthRadius = 6378137 #Earth is a sphere witht this radius
+    earthRadius = 6378137 #Earth is a sphere with this radius
     aBessel = 6377397.155
     eeBessel = 0.0066743722296294277832
     ScaleFactor = 0.00000982
