@@ -98,8 +98,8 @@ def seven_parameter_helmert_transf(right, height, use_wgs84=False):
 
         not_accurate_enough = (abs(Latitude - LatitudeIt) >= 0.000000000000001)
 
-    GeoDezRight = (Latitude / pi) * 180;
-    GeoDezHeight = (GeoDezHeight) / pi * 180;
+    GeoDezRight = (Latitude / pi) * 180
+    GeoDezHeight = (GeoDezHeight) / pi * 180
 
     return (GeoDezRight, GeoDezHeight)
 
@@ -117,4 +117,3 @@ sub convertToClassicNotation
   #Building of the Output-String
   return(round($param) . '°' . round(($param - round($param)) * 60) . "\'" . $SecondsAbs . '.' . $ShortedSecondsRest . '"');
 }"""
-
