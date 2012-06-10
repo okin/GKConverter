@@ -1,3 +1,5 @@
+#! python
+#-*- coding: utf-8 -*-
 import unittest
 import gkconverter as GKConverter
 
