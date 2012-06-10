@@ -41,8 +41,7 @@ def gauss_krueger_transformation(right, height):
 
 
 def seven_parameter_helmert_transf(right, height, use_wgs84=False):
-    #Variables used in the transformation
-    earthRadius = 6378137 #Earth is a sphere with this radius
+    earthRadius = 6378137  # Earth is a sphere with this radius
     aBessel = 6377397.155
     eeBessel = 0.0066743722296294277832
     ScaleFactor = 0.00000982
@@ -102,18 +101,3 @@ def seven_parameter_helmert_transf(right, height, use_wgs84=False):
     GeoDezHeight = (GeoDezHeight) / pi * 180
 
     return (GeoDezRight, GeoDezHeight)
-
-
-"""
-#Convert the Value into classic notation
-sub convertToClassicNotation
-{
-  my $param = pop(@_);
-  my $SecondsAbs = ($param - round($param - round(($param - round($param)) * 60) / 60) * 60 * 60);
-  my $ShortedSecondsRest = $SecondsAbs - round($SecondsAbs);
-  $SecondsAbs = round($SecondsAbs);
-  $ShortedSecondsRest = round($ShortedSecondsRest * 100); # -> Zwei Stellen
-
-  #Building of the Output-String
-  return(round($param) . '°' . round(($param - round($param)) * 60) . "\'" . $SecondsAbs . '.' . $ShortedSecondsRest . '"');
-}"""
