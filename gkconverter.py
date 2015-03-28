@@ -3,7 +3,7 @@
 """
 Converting a Gauss-Kruger-Code to a latitude / longitude coordinate.
 """
-from math import cos, pi, sqrt, tan, sin, atan
+from math import cos, pi, sqrt, tan, sin, atan, trunc
 
 
 def convert_GK_to_lat_long(right, height, use_wgs84=None):
@@ -31,11 +31,11 @@ def gauss_krueger_transformation(right, height):
     g2 = e2 * (co * co)
     g1 = c / sqrt(1 + g2)
     t = tan(bf)
-    fa = (GKRight - round(GKRight / 1000000) * 1000000 - 500000) / g1
+    fa = (GKRight - trunc(GKRight / 1000000) * 1000000 - 500000) / g1
 
     GeoDezRight = ((bf - fa * fa * t * (1 + g2) / 2 + fa * fa * fa * fa * t * (5 + 3 * t * t + 6 * g2 - 6 * g2 * t * t) / 24) * rho)
     dl = fa - fa * fa * fa * (1 + 2 * t * t + g2) / 6 + fa * fa * fa * fa * fa * (1 + 28 * t * t + 24 * t * t * t * t) / 120
-    GeoDezHeight = dl * rho / co + round(GKRight / 1000000) * 3
+    GeoDezHeight = dl * rho / co + trunc(GKRight / 1000000) * 3
 
     return (GeoDezRight, GeoDezHeight)
 
