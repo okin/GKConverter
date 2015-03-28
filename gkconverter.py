@@ -1,5 +1,5 @@
-#! python
-#-*- coding: utf-8 -*-
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 Converting a Gauss-Kruger-Code to a latitude / longitude coordinate.
 """
@@ -13,11 +13,11 @@ def convert_GK_to_lat_long(right, height, use_wgs84=None):
 
 
 def gauss_krueger_transformation(right, height):
-    #Check for invalid Parameters
-    if (not ((right > 1000000) and (height > 1000000))):
+    # Check for invalid Parameters
+    if not ((right > 1000000) and (height > 1000000)):
         raise ValueError("No valid Gauss-Kruger-Code.")
 
-    #Variables to prepare the geovalues
+    # Variables to prepare the geovalues
     GKRight = right
     GKHeight = height
     e2 = 0.0067192188
@@ -53,7 +53,7 @@ def seven_parameter_helmert_transf(right, height, use_wgs84=False):
     ShiftZMeters = 396.39
     LatitudeIt = 99999999
 
-    if(use_wgs84):
+    if use_wgs84:
         ee = 0.0066943799
     else:
         ee = 0.00669438002290
@@ -83,7 +83,7 @@ def seven_parameter_helmert_transf(right, height, use_wgs84=False):
 
     not_accurate_enough = True
 
-    while(not_accurate_enough):
+    while not_accurate_enough:
         LatitudeIt = Latitude
 
         n = 1 - ee * sin(Latitude) * sin(Latitude)
@@ -95,7 +95,7 @@ def seven_parameter_helmert_transf(right, height, use_wgs84=False):
         Latitude = (CartOutputZMeters + ee * n * sin(LatitudeIt)) / Latitude
         Latitude = atan(Latitude)
 
-        not_accurate_enough = (abs(Latitude - LatitudeIt) >= 0.000000000000001)
+        not_accurate_enough = abs(Latitude - LatitudeIt) >= 0.000000000000001
 
     GeoDezRight = (Latitude / pi) * 180
     GeoDezHeight = (GeoDezHeight) / pi * 180
